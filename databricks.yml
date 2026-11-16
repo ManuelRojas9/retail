@@ -1,0 +1,17 @@
+bundle:
+  name: retail
+
+include:
+  - resources/*.yml
+
+variables:
+  catalog:
+    description: Catálogo de Unity Catalog donde se publican las tablas
+    default: retail
+
+targets:
+  dev:
+    mode: development   # prefija los recursos con [dev <usuario>] y pausa los schedules
+    default: true
+    workspace:
+      host: https://dbc-66d4d025-28d2.cloud.databricks.com

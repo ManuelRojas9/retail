@@ -8,9 +8,9 @@ PROFILE="${2:-DEFAULT}"
 SRC="data"
 DST="dbfs:/Volumes/retail/bronze/raw"
 
-cp_one() { databricks fs cp --overwrite -p "$PROFILE" "$1" "$DST/$2"; }
+for d in crm erp_cdc app_events; do databricks fs mkdir -p "$PROFILE" "$DST/$d"; done
 
-cp_one "$SRC/crm/clientes_${DAY}.csv" "crm/clientes_${DAY}.csv"
+databricks fs cp --overwrite -p "$PROFILE" "$SRC/crm/clientes_${DAY}.csv" "$DST/crm/clientes_${DAY}.csv"
 databricks fs cp -r --overwrite -p "$PROFILE" "$SRC/erp_cdc/date=${DAY}" "$DST/erp_cdc/date=${DAY}"
 databricks fs cp -r --overwrite -p "$PROFILE" "$SRC/app_events/date=${DAY}" "$DST/app_events/date=${DAY}"
 

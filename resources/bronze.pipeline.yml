@@ -1,0 +1,10 @@
+resources:
+  pipelines:
+    retail_bronze:
+      name: retail_bronze
+      catalog: ${var.catalog}
+      schema: bronze
+      serverless: true
+      libraries:
+        - glob:
+            include: ../src/pipelines/bronze/**
